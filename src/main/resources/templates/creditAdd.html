@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <div class="container" style="background: #ffffff;padding: 15px;margin-top: 150px;">
+        <div class="text-center block-heading">
+            <h2 class="text-info">Добавить</h2>
+        </div>
+        <div th:if="${message}" align="center">
+            <div class="alert alert-warning w-75" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+        </div>
+        <form action="/credits/add" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Название</p><input class="form-control" type="text" required="" name="name">
+                </div>
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Процентная ставка</p><input class="form-control" type="number" name="rate" step="1" min="1"
+                                                   max="100" required>
+                </div>
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Минимальный и максимальный срок кредитования</p>
+                    <div class="row">
+                        <div class="col"><input class="form-control" type="number" name="minTerm" required step="1" min="1"></div>
+                        <div class="col"><input class="form-control" type="number" name="maxTerm" required step="1" min="1"></div>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Минимальный и максимальный лимит кредитования</p>
+                    <div class="row">
+                        <div class="col"><input class="form-control" type="number" name="minLimit" required step="1" min="1"></div>
+                        <div class="col"><input class="form-control" type="number" name="maxLimit" required step="1" min="1"></div>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Цель кредитования</p><select class="form-select" name="goal">
+                    <option th:each="g : ${goals}" th:value="${g}" th:label="${g.name}"></option>
+                </select>
+                </div>
+                <div class="col-6" style="margin-bottom: 5px;">
+                    <p>Картинка</p><input class="form-control" type="file" name="file" required="" accept="image/*">
+                </div>
+                <div class="col-12" style="margin-bottom: 5px;">
+                    <p>Описание</p><input class="form-control" type="text" name="description" required>
+                </div>
+                <div class="col-12" style="margin-bottom: 5px;">
+                    <button class="btn btn-primary" type="submit" style="width: 100%;">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>
